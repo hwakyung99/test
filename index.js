@@ -1,13 +1,17 @@
 const express = require('express')
+const morgan = require("morgan")
 const app = express()
 
-const indexRouter = require("./routes")
+app.set('port', process.env.PORT || 8080)
 
-app.use("/api", indexRouter)
+const indexRouter = require("./routes/index")
+const apiRouter = require("./routes/api")
 
-app.get('/', (req, res) => res.json({
-    message : process.env.PORT,
-    db: process.env.MONGO_URI
-}))
+app.use(morgan("dev"));
+app.use(express.json())
+app.use("/", indexRouter)
+app.use("/api", apiRouter)
 
-app.listen(process.env.PORT || 80)
+app.listen(app.get('port'), () => {
+    console.log("살려줘요");
+})

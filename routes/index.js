@@ -1,6 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-router.get("/test", async (req, res) => {
-    res.json({ "test" : "hwakyung" })
-})
+router.get('/', (req, res) => res.json({
+    message : process.env.PORT,
+    db: process.env.MONGO_URI
+}))
+
+module.exports = router
