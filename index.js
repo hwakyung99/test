@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 
+const indexRouter = require("./routes")
+
+app.use("/api", indexRouter)
+
 app.get('/', (req, res) => res.json({
     message : process.env.PORT,
     db: process.env.MONGO_URI
